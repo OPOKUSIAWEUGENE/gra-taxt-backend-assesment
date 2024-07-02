@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GRAGrossRequest;
 use App\Http\Requests\GRATaxRequest;
 use App\Services\GRATaxService;
 use Illuminate\Http\JsonResponse;
@@ -28,19 +29,19 @@ class GRATaxController extends Controller
      */
     public function getNetIncome(GRATaxRequest $request):JsonResponse
     {
-        $data=$request->only(['gross_salary']);
-        return $this->service->getNetIncome($data);
+        \Log::alert($request->gross_salary);
+    
+        return $this->service->getNetIncome($request->gross_salary, $request->allowance);
     }
 
     /**
-     * get gross salary from net income
-     * 
-     * @param GRATaxRequest $request
-     * @return JsonResponse
+     * Summary of getGrossSalary
+     * @param \App\Http\Requests\GRAGrossRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function getGrossSalary(GRATaxRequest $request):JsonResponse
+    public function getGrossSalary(GRAGrossRequest $request):JsonResponse
     {
-        $data=$request->only(['net_salary','allowance']);
-        return $this->service->getGrossIncome($data);
+
+        return $this->service->getGrossIncome($request->net_salary, $request->allowance);
     }
 }

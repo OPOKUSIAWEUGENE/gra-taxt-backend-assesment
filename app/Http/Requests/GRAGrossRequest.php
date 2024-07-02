@@ -8,8 +8,9 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class GRATaxRequest extends FormRequest
+class GRAGrossRequest extends FormRequest
 {
+
     use Common;
     use Errors;
     /**
@@ -44,7 +45,8 @@ class GRATaxRequest extends FormRequest
     {
         return [
             'allowance'=>['required','numeric'],
-            'gross_salary'=>['required','numeric'],
+            'net_salary'=>['required','numeric'],
+          
 
         ];
     }
